@@ -11,12 +11,6 @@ This project implements a Model Context Protocol (MCP) server for interacting wi
 - 👤 Get author details
 - 🔗 Fetch citations and references for a paper
 
-## 📋 Prerequisites
-
-- 🐍 Python 3.10+
-- 📚 `semanticscholar` Python package
-- 🔧 `mcp` Python package (Model Context Protocol)
-
 ## 🚀 Installation
 ### Installing via Smithery
 
@@ -39,29 +33,76 @@ npx -y @smithery/cli@latest run @JackKuo666/semanticscholar-mcp-server --client 
 ```sh
 npx -y @smithery/cli@latest install @JackKuo666/semanticscholar-mcp-server --client windsurf --config "{}"
 ```
-### CLine
+#### CLine
 ```sh
 npx -y @smithery/cli@latest install @JackKuo666/semanticscholar-mcp-server --client cline --config "{}"
 ```
 
+### Installing Manually
+[UV](https://github.com/astral-sh/uv) is a modern Python package manager and environment manager. Here's how to use it with this project:
+
+```bash
+uv tool install git+https://github.com/JackKuo666/semanticscholar-MCP-Server.git
+```
+Test:
+```bash
+semanticscholar-mcp serve
+# output:
+# Starting Semantic Scholar MCP server
+```
+ctrl + c to stop the server
+
+### Installing for Developers
 
 1. Clone this repository:
-   ```
-   git clone https://github.com/JackKuo666/semanticscholar-MCP-Server.git
-   cd semanticscholar-mcp-server
-   ```
+```
+git clone https://github.com/JackKuo666/semanticscholar-MCP-Server.git
+cd semanticscholar-mcp-server
+```
 
-2. Install the required packages:
-   ```
-   pip install semanticscholar mcp
-   ```
+2. Install the dependencies:
+```
+uv sync
+```
+
+3. Run the server:
+```
+uv run semantic_scholar_server.py
+```
+
+4. Run the CLI:
+```
+uv run semantic_scholar_cli.py
+```
 
 ## 🖥️ Usage
 
+If you install the server via `uv` to local, you can use the following configuration for different clients:
+
+### Claude Desktop & Cursor & Cline
+
+Add this configuration to your `claude_desktop_config.json`, `cursor_config.json` or other config files:
+
+```json
+{
+  "mcpServers": {
+    "semanticscholar": {
+      "command": "semanticscholar-mcp",
+      "args": ["serve"],
+      "env": {},
+      "disabled": false,
+      "autoApprove": []
+      }
+  }
+}
+```
+
+### Manually Start for Development
+
 1. Start the Semantic Scholar MCP server:
-   ```
-   python semantic_scholar_server.py
-   ```
+```
+semanticscholar-mcp serve
+```
 
 2. The server will start and listen for MCP requests.
 
@@ -72,62 +113,12 @@ npx -y @smithery/cli@latest install @JackKuo666/semanticscholar-mcp-server --cli
    - 👤 `get_semantic_scholar_author_details`: Get details of a specific author
    - 🔗 `get_semantic_scholar_citations_and_references`: Get citations and references for a paper
 
-## Usage with Claude Desktop
-
-Add this configuration to your `claude_desktop_config.json`:
-
-(Mac OS)
-
-```json
-{
-  "mcpServers": {
-    "semanticscholar": {
-      "command": "python",
-      "args": ["-m", "semanticscholar_mcp_server"]
-      }
-  }
-}
-```
-
-(Windows version):
-
-```json
-{
-  "mcpServers": {
-    "semanticscholar": {
-      "command": "C:\\Users\\YOUR\\PATH\\miniconda3\\envs\\mcp_server\\python.exe",
-      "args": [
-        "D:\\code\\YOUR\\PATH\\semanticscholar-MCP-Server\\semanticscholar_server.py"
-      ],
-      "env": {},
-      "disabled": false,
-      "autoApprove": []
-    }
-  }
-}
-```
-Using with Cline
-```json
-{
-  "mcpServers": {
-    "semanticscholar": {
-      "command": "bash",
-      "args": [
-        "-c",
-        "source /home/YOUR/PATH/.venv/bin/activate && python /home/YOUR/PATH/semanticscholar_mcp_server.py"
-      ],
-      "env": {},
-      "disabled": false,
-      "autoApprove": []
-    }
-  }
-}
-```
 
 ## 📁 File Structure
 
 - 📜 `semantic_scholar_search.py`: Contains functions for interacting with the Semantic Scholar API
 - 🖥️ `semantic_scholar_server.py`: Implements the MCP server and defines the available tools
+- 📄 `semantic_scholar_cli.py`: Implements the MCP server and defines the available tools
 
 ## 🤝 Contributing
 

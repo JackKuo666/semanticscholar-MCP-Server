@@ -1,11 +1,16 @@
 from typing import Any, List, Dict
 import asyncio
 import logging
+import sys
 from mcp.server.fastmcp import FastMCP
 from semantic_scholar_search import initialize_client, search_papers, get_paper_details, get_author_details, get_citations_and_references
 
 # Set up logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    stream=sys.stderr
+)
 
 # Initialize FastMCP server
 mcp = FastMCP("semanticscholar")

@@ -1,4 +1,6 @@
-requests
-bs4 
-mcp 
-semanticscholar
+# Keep mcp on 1.x: this server uses the v1 FastMCP API (mcp.server.fastmcp).
+# mcp 2.x removed that module and renamed FastMCP to MCPServer.
+mcp==1.30.0
+semanticscholar==0.12.0
+requests==2.34.2
+bs4==0.0.2

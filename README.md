@@ -51,9 +51,9 @@ npx -y @smithery/cli@latest install @JackKuo666/semanticscholar-mcp-server --cli
    cd semanticscholar-mcp-server
    ```
 
-2. Install the required packages:
+2. Install the pinned required packages:
    ```
-   pip install semanticscholar mcp
+   pip install -r requirements.txt
    ```
 
 ## 🖥️ Usage
